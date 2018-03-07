@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[NOIP2017游记]]></title>
+    <url>%2F2018%2F11%2F15%2Ftest%2F</url>
+    <content type="text"><![CDATA[this is a test file]]></content>
+      <tags>
+        <tag>NOIP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[BZOJ[2818]-gcd]]></title>
     <url>%2F2017%2F12%2F23%2FBZOJ%5B2818%5D-gcd%2F</url>
     <content type="text"><![CDATA[BZOJ[2818]-gcdDescription给定整数N，求1&lt;=x,y&lt;=N且Gcd(x,y)为素数的数对(x,y)有多少对。 简易题解此题显然需要求gcd(x,y)=p_{i} \quad x,y\in[1,N]。我们可以将其转化成求gcd(x,y)=1 \quad x,y\in[1,N/p_{i}]。不妨设 x &lt; y，那么上式就变成了求φ(y)的前缀和，然后×2即可。由于是有序数对，需要最后需要－1。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;bitset&gt;#define LL long long using namespace std;const int N=10000005;int p_table[N/7];int p_cnt;bitset&lt;N&gt; isp;int phi[N];LL f[N];int n;void getTable()&#123; p_cnt=1; isp.set(); //°ÑispËùÓÐÎ»¶¼ÖÃÎª1 for(int i=2;i&lt;=N;i++)&#123; if(isp[i])&#123; p_table[p_cnt++]=i; phi[i]=i-1; &#125; for(int j=1;i*p_table[j]&lt;=N&amp;&amp;j&lt;p_cnt;j++)&#123; isp[p_table[j]*i]=0; if(!(i%p_table[j]))&#123; phi[i*p_table[j]]=phi[i]*p_table[j]; break; &#125;else phi[i*p_table[j]]=phi[i]*(p_table[j]-1); &#125; &#125; p_cnt--; f[1]=1; for(int i=2;i&lt;N;i++) f[i]=f[i-1]+phi[i];&#125; LL getAns()&#123; LL ans=0; for(int i=1;i&lt;=p_cnt&amp;&amp;p_table[i]&lt;=n;i++) ans+=2*f[n/p_table[i]]-1; return ans;&#125;int main()&#123; getTable(); scanf("%d",&amp;n); printf("%lld\n",getAns()); return 0;&#125;]]></content>
